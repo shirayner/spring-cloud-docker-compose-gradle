@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'spring-cloud-docker-compose-gradle'
+include 'dc-model'
+include 'dc-register-server-eureka'
+include 'dc-product-service'
+include 'dc-order-service'
+
+

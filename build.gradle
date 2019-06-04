@@ -1,0 +1,65 @@
+buildscript {
+    ext {
+        springCloudVersion = 'Greenwich.SR1'
+        springBootVersion = '2.1.5.RELEASE'
+    }
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+//配置所有项目
+allprojects {
+    //公共插件插件
+    apply plugin: 'java'
+
+    //公共属性
+    group = 'com.ray.study.dockercompose'
+    version = '0.0.1-SNAPSHOT'
+
+    //编译版本
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+}
+
+//构建依赖
+subprojects {
+
+    //应用插件
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+    }
+
+}
+
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
