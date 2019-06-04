@@ -1,5 +1,5 @@
 dependencies {
-    compile  project(':dc-model')
+    compile(project(":dc-model"))
 
     // eureka client
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
